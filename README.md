@@ -15,7 +15,7 @@ CMakeLists.txt
 
 ## Building
 
-> **Note:** The example build commands below use `-DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake` to ensure the use of a custom LLVM Clang installation. You should adjust the command to use your own compiles what provide C++20 modules support.
+> **Note:** The example build commands below use `-DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake` to ensure the use of a custom LLVM Clang installation. You should adjust the command to use your own compilers that provide C++20 modules support.
 
 **Traditional:**
 ```bash
