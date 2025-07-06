@@ -1,7 +1,5 @@
 #include <iostream>
-#include "config.hpp"
-#include "non_template_lib.hpp"
-#include "template_lib.hpp"
+#include "demo.hpp"
 
 int main()
 {
@@ -11,7 +9,7 @@ int main()
     int result = demo::add_magic(100);
     std::cout << "100 + magic = " << result << "\n";
 
-    DEMO_TEST_EQ(result, 142);
+    DEMO_TEST_EQ(result, 142); // downstream users directly use macros form config.hpp
 
     return 0;
 }

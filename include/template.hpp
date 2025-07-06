@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config.hpp"
-#include "non_template_lib.hpp"  // for get_magic_number()
+#include "non_template.hpp"  // for get_magic_number()
 
 namespace demo {
 
@@ -21,4 +21,4 @@ DEMO_FORCEINLINE T add_magic(T input)
 
 #endif // DEMO_WITH_FEATURE_X
 
-}
+} // namespace demo
