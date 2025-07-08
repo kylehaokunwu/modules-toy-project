@@ -13,7 +13,7 @@ export module Demo : interface_partition_non_template;
 export {
 namespace demo {
 
-DEMO_EXPORT int get_magic_number();
+extern "C++" DEMO_EXPORT int get_magic_number();
 
 } // namespace demo
 } // end export
