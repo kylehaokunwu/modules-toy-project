@@ -49,10 +49,8 @@ ninja
 ### Header-Based Build with Debug Mode OFF
 ```sh
 # NOTE: The -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake flag is used here
-# because this project requires a custom LLVM Clang toolchain and macOS SDK.
-# Most users on Linux or with a system Clang do NOT need this flag.
+# to enable LLVM Clang toolchain and macOS SDK on my machine only. 
 
-rm -rf build
 mkdir build && cd build
 cmake -G Ninja .. -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake
 ninja
@@ -68,10 +66,8 @@ Magic number: 42
 ### Module-Based Build with Debug Mode ON
 ```sh
 # NOTE: The -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake flag is used here
-# because this project requires a custom LLVM Clang toolchain and macOS SDK.
-# Most users on Linux or with a system Clang do NOT need this flag.
+# to enable LLVM Clang toolchain and macOS SDK on my machine only. 
 
-rm -rf build
 mkdir build && cd build
 cmake -G Ninja .. -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake -DDEMO_USE_MODULES=ON -DDEMO_DEBUG=ON
 ninja
@@ -85,8 +81,3 @@ Magic number: 42
 Getting magic number...
 100 + magic = 142
 ```
-
-## How It Works
-- **Template headers** (`template.hpp`) use preprocessor conditions to become a module interface unit when `DEMO_USE_MODULES` is ON, and a normal header otherwise.
-- **Non-template functions** are declared in module interface units (`non_template.ixx`) and implemented in `lib/lib.cpp`.
-- **No scripts or code generation**: All logic is handled by the build system and preprocessor.
