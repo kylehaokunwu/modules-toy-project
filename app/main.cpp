@@ -1,3 +1,12 @@
+// =============================================
+// Example Application
+// =============================================
+// This application demonstrates how to use the library
+// in both traditional header-based and C++20 module-based builds.
+// It includes demo.hpp which provides a unified interface
+// regardless of the underlying build mode.
+// =============================================
+
 #include <iostream>
 #include "demo.hpp"
 

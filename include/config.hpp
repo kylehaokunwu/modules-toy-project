@@ -1,5 +1,19 @@
 #pragma once
 
+// =============================================
+// Project Configuration and Platform Abstractions
+// =============================================
+// This header provides all project-wide configuration macros,
+// platform abstractions, and build-time definitions.
+//
+// Contents:
+// - Visibility macros for shared library exports
+// - Build configuration flags (C++20 modules, features, debug)
+// - Compiler/platform abstractions (inline, unused variables)
+// - Testing and assertion macros
+// - Feature detection and utility macros
+// =============================================
+
 // ========================
 // 1. Visibility Macros 
 // ========================
@@ -16,10 +30,6 @@
 
 #ifndef DEMO_WITH_FEATURE_X
 #define DEMO_WITH_FEATURE_X
-#endif
-
-#ifndef DEMO_DEBUG
-#define DEMO_DEBUG
 #endif
 
 // =======================================

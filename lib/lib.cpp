@@ -1,3 +1,12 @@
+// =============================================
+// Traditional Implementation File
+// =============================================
+// This file contains the implementation of non-template functions
+// that are declared in include/non_template.hpp. It is used in
+// traditional header-based builds and also linked into module
+// builds to provide the actual function implementations.
+// =============================================
+
 #include "non_template.hpp"
 #include "config.hpp"
 #include <iostream>
