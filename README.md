@@ -26,7 +26,6 @@ CMakeLists.txt     # Root build configuration
 - Clang 16+ (with C++20 modules support)
 - Ninja (recommended)
 
-> **Note:** If you want to use a custom LLVM/Clang toolchain, you can add `-DCMAKE_TOOLCHAIN_FILE=...` to the `cmake` command. Most users can omit this flag.
 
 ### Traditional Header-Based Build (Default)
 ```sh
