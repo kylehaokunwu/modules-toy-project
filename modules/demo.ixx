@@ -7,8 +7,16 @@
 // =============================================
 
 module;
+
+// Include all system headers in global module fragment to prevent ODR violations
+#include "system_headers.hpp"
+
+// Define module-specific macros before including config
+#define DEMO_BUILD_MODULE
+#include "config.hpp"
+
 export module Demo;
 
-// Import and re-export all module partitions
-export import :interface_partition_non_template;  // non-template functions
-export import :interface_partition_template;      // template functions
+// Include project headers after module declaration
+#include "template.hpp"
+#include "non_template.hpp"

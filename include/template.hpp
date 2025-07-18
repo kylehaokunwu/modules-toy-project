@@ -1,47 +1,24 @@
 #pragma once
 
 // =============================================
-// EXPERIMENTAL: Dual-Mode Template Header
+// Template Function Declarations
 // =============================================
-// This header uses preprocessor conditions to act as:
-// 1. Traditional header (when DEMO_USE_MODULES is OFF)
-// 2. Module interface unit (when DEMO_USE_MODULES is ON)
-//
-// In module mode, this file is compiled as a translation unit
-// and exports template functions for the Demo module.
+// This header declares template functions that are
+// implemented inline. These templates use visibility
+// attributes for shared library exports in header-based builds.
 // =============================================
 
-#if DEMO_USE_MODULES
-
-// Module mode: This header becomes a module interface unit
-module;
-#include "config.hpp"
-
-export module Demo : interface_partition_template;
-export import :interface_partition_non_template;
-
-// Redefine DEMO_EXPORT to 'export' for module export
-#undef DEMO_EXPORT
-#define DEMO_EXPORT export
-
-#else
-
-// Traditional header mode: Normal includes and visibility attributes
 #include "config.hpp"
 #include "non_template.hpp"  // for get_magic_number()
-
-// Redefine DEMO_EXPORT to nothing for header mode
-#undef DEMO_EXPORT
-#define DEMO_EXPORT
-
-#endif
 
 namespace demo {
 
 #if defined(DEMO_WITH_FEATURE_X)
 
-// DEMO_EXPORT expands to 'export' in module mode, nothing in header mode
-DEMO_EXPORT template <typename T>
+// Template function with dual export support:
+// - DEMO_MODULE_EXPORT: export keyword for module builds
+// - DEMO_FORCEINLINE: compiler hint for inline optimization
+DEMO_MODULE_EXPORT template <typename T>
 DEMO_FORCEINLINE T add_magic(T input)
 {
     int magic = get_magic_number();  // call the non-template function

@@ -14,8 +14,6 @@ target_sources(demo_lib
     PUBLIC
         FILE_SET demo_lib_public_sources TYPE CXX_MODULES FILES
             demo.ixx              # primary module interface unit
-            non_template.ixx      # module interface unit for non-template functions
-            template.ixx          # module interface unit wrapper for template functions
     PRIVATE
         ${PROJECT_SOURCE_DIR}/lib/lib.cpp  # traditional implementation file
 )

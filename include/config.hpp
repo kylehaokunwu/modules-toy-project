@@ -17,10 +17,20 @@
 // ========================
 // 1. Visibility Macros 
 // ========================
+// Used in traditional header-based/shared-library builds
 #if defined(_MSC_VER)
 #  define DEMO_EXPORT __declspec(dllexport)
 #else
 #  define DEMO_EXPORT __attribute__((visibility("default")))
+#endif
+
+// Used only in module interface files (e.g. demo.ixx)
+#ifdef DEMO_BUILD_MODULE
+#  define DEMO_MODULE_EXPORT export  // Export symbols from module interface
+#  undef DEMO_EXPORT
+#  define DEMO_EXPORT                 // Empty in module mode (no visibility needed)
+#else
+#  define DEMO_MODULE_EXPORT          // Empty in header mode (no export needed)
 #endif
 
 // ============================
@@ -60,3 +70,4 @@
 // ===================================
 #define DEMO_PP_STRINGIZE(x) #x
 #define DEMO_PP_CAT(a, b) a##b
+

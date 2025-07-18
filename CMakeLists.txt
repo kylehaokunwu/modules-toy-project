@@ -52,7 +52,7 @@ if(DEMO_USE_MODULES)
     add_subdirectory(modules)
 else()
     # Build from traditional source
-    add_subdirectory(lib)
+add_subdirectory(lib)
 endif()
 
 # App always needs to be built

@@ -4,6 +4,10 @@ This project demonstrates an **experimental dual-mode C++ library** that support
 - **Traditional header-based builds** (classic C++ with headers and source files)
 - **C++20 module-based builds** (using Clang and CMake)
 
+### Technical Challenges Solved:
+- **System header redefinition**: Centralized system headers in `system_headers.hpp` to prevent ODR violations
+- **Module export macros**: Created conditional macros (`DEMO_EXPORT`, `DEMO_MODULE_EXPORT`) that expand correctly in each build mode
+
 ## Key Features
 - **Single user-facing header (`demo.hpp`)**: Works for both modes
 - **Template headers**: Use preprocessor logic to act as both a header and a module interface unit
@@ -25,7 +29,6 @@ CMakeLists.txt     # Root build configuration
 - CMake 3.28+
 - Clang 16+ (with C++20 modules support)
 - Ninja (recommended)
-
 
 ### Traditional Header-Based Build (Default)
 ```sh

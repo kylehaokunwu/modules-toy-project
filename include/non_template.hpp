@@ -14,6 +14,8 @@
 
 namespace demo {
 
-DEMO_EXPORT int get_magic_number();
+// - DEMO_EXPORT: visibility attribute for shared library builds
+// - DEMO_MODULE_EXPORT: export keyword for module builds
+extern "C++" DEMO_EXPORT DEMO_MODULE_EXPORT int get_magic_number();
 
 } // namespace demo
