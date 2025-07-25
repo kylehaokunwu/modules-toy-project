@@ -1,5 +1,13 @@
 #pragma once
 
+// =============================================
+// Template Function Declarations
+// =============================================
+// This header declares template functions that are
+// implemented inline. These templates use visibility
+// attributes for shared library exports in header-based builds.
+// =============================================
+
 #include "config.hpp"
 #include "non_template.hpp"  // for get_magic_number()
 
@@ -7,7 +15,10 @@ namespace demo {
 
 #if defined(DEMO_WITH_FEATURE_X)
 
-template <typename T>
+// Template function with dual export support:
+// - DEMO_MODULE_EXPORT: export keyword for module builds
+// - DEMO_FORCEINLINE: compiler hint for inline optimization
+DEMO_EXPORT_TEMPLATE template <typename T>
 DEMO_FORCEINLINE T add_magic(T input)
 {
     int magic = get_magic_number();  // call the non-template function

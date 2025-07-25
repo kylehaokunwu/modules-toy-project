@@ -1,12 +1,38 @@
 #pragma once
 
+// =============================================
+// Project Configuration and Platform Abstractions
+// =============================================
+// This header provides all project-wide configuration macros,
+// platform abstractions, and build-time definitions.
+//
+// Contents:
+// - Visibility macros for shared library exports
+// - Build configuration flags (C++20 modules, features, debug)
+// - Compiler/platform abstractions (inline, unused variables)
+// - Testing and assertion macros
+// - Feature detection and utility macros
+// =============================================
+
 // ========================
 // 1. Visibility Macros 
 // ========================
+// Used in traditional header-based/shared-library builds
 #if defined(_MSC_VER)
 #  define DEMO_EXPORT __declspec(dllexport)
 #else
 #  define DEMO_EXPORT __attribute__((visibility("default")))
+#endif
+
+// Used only in module interface files (e.g. demo.ixx)
+#ifdef DEMO_BUILD_MODULE
+#  define DEMO_EXPORT_FUNCTION extern "C++" export // Export non-template symbols
+#  define DEMO_EXPORT_TEMPLATE export              // Export template symbols
+#  undef DEMO_EXPORT
+#  define DEMO_EXPORT                 // Empty in module mode (no visibility needed)
+#else
+#  define DEMO_EXPORT_FUNCTION
+#  define DEMO_EXPORT_TEMPLATE
 #endif
 
 // ============================
@@ -16,10 +42,6 @@
 
 #ifndef DEMO_WITH_FEATURE_X
 #define DEMO_WITH_FEATURE_X
-#endif
-
-#ifndef DEMO_DEBUG
-#define DEMO_DEBUG
 #endif
 
 // =======================================
@@ -50,3 +72,4 @@
 // ===================================
 #define DEMO_PP_STRINGIZE(x) #x
 #define DEMO_PP_CAT(a, b) a##b
+

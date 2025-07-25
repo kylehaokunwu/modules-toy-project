@@ -1,42 +1,84 @@
-# Toy Modular Project
+# Modular Toy Project (C++20 Modules & Traditional Headers)
 
-A modern C++20 modular shared library supporting both traditional headers and C++20 modules. 
+This project demonstrates an **experimental dual-mode C++ library** that supports both:
+- **Traditional header-based builds** (classic C++ with headers and source files)
+- **C++20 module-based builds** (using Clang and CMake)
 
-## Structure
+### Technical Challenges Solved:
+- **System header redefinition**: Centralized system headers in `system_headers.hpp` to prevent ODR violations
+- **Module export macros**: Created conditional macros (`DEMO_EXPORT`, `DEMO_EXPORT_FUNCTION`, `DEMO_EXPORT_TEMPLATE` ) that expand correctly in each build mode
 
+## Key Features
+- **Single user-facing header (`demo.hpp`)**: Works for both modes
+- **Headers with conditional macros**: Use preprocessor logic to act as both a header or a module interface unit
+- **Switch build modes with a single CMake option**
+
+## Project Structure
 ```
-include/      # Public headers (demo.hpp is the user entry point)
-lib/          # Traditional source
-modules/      # All .ixx module units (auto-generated)
-scripts/      # Python scripts for module conversion
-app/          # Example app
-CMakeLists.txt
+include/           # Public headers (template and non-template)
+lib/               # Traditional implementation (lib.cpp)
+modules/           # Module interface units (.ixx wrappers)
+app/               # Example application
+CMakeLists.txt     # Root build configuration
 ```
 
-## Building
+## Building the Project
 
-> **Note:** The example build commands below use `-DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake` to ensure the use of a custom LLVM Clang installation. You should adjust the command to use your own compilers that provide C++20 modules support.
+### Prerequisites
+- CMake 3.28+
+- Clang 16+ (with C++20 modules support)
+- Ninja (recommended)
 
-**Traditional:**
-```bash
+### Traditional Header-Based Build (Default)
+```sh
+mkdir -p build && cd build
+cmake -G Ninja ..
+ninja
+./app/demo_app
+```
+
+### C++20 Module-Based Build
+```sh
+mkdir -p build && cd build
+cmake -G Ninja .. -DDEMO_USE_MODULES=ON
+ninja
+./app/demo_app
+```
+
+## Demonstration
+
+### Header-Based Build with Debug Mode OFF
+```sh
+# NOTE: The -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake flag is used here
+# to enable LLVM Clang toolchain and macOS SDK on my machine only. 
+
+mkdir build && cd build
 cmake -G Ninja .. -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake
 ninja
+./app/demo_app
 ```
 
-**Modules:**
-```bash
-cmake -G Ninja .. -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake -DDEMO_USE_MODULES=ON
+**Output:**
+```
+Magic number: 42
+100 + magic = 142
+```
+
+### Module-Based Build with Debug Mode ON
+```sh
+# NOTE: The -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake flag is used here
+# to enable LLVM Clang toolchain and macOS SDK on my machine only. 
+
+mkdir build && cd build
+cmake -G Ninja .. -DCMAKE_TOOLCHAIN_FILE=../llvm.toolchain.cmake -DDEMO_USE_MODULES=ON -DDEMO_DEBUG=ON
 ninja
+./app/demo_app
 ```
 
-## Regenerate Modules
-
-```bash 
-python scripts/convert_header_to_module.py include/non_template.hpp modules/non_template.ixx
-python scripts/convert_header_to_module.py include/template.hpp modules/template.ixx
-python scripts/convert_source_to_module.py lib/lib.cpp modules/lib.ixx
-python scripts/generate_primary_module.py modules/demo.ixx modules/non_template.ixx modules/template.ixx
+**Output:**
 ```
-
----
-- All module files are auto-documented with their origin and conversion script.
+Getting magic number...
+Magic number: 42
+Getting magic number...
+100 + magic = 142
+```
