@@ -26,11 +26,13 @@
 
 // Used only in module interface files (e.g. demo.ixx)
 #ifdef DEMO_BUILD_MODULE
-#  define DEMO_MODULE_EXPORT export  // Export symbols from module interface
+#  define DEMO_EXPORT_FUNCTION extern "C++" export // Export non-template symbols
+#  define DEMO_EXPORT_TEMPLATE export              // Export template symbols
 #  undef DEMO_EXPORT
 #  define DEMO_EXPORT                 // Empty in module mode (no visibility needed)
 #else
-#  define DEMO_MODULE_EXPORT          // Empty in header mode (no export needed)
+#  define DEMO_EXPORT_FUNCTION
+#  define DEMO_EXPORT_TEMPLATE
 #endif
 
 // ============================

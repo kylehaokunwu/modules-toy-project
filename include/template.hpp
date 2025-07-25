@@ -18,7 +18,7 @@ namespace demo {
 // Template function with dual export support:
 // - DEMO_MODULE_EXPORT: export keyword for module builds
 // - DEMO_FORCEINLINE: compiler hint for inline optimization
-DEMO_MODULE_EXPORT template <typename T>
+DEMO_EXPORT_TEMPLATE template <typename T>
 DEMO_FORCEINLINE T add_magic(T input)
 {
     int magic = get_magic_number();  // call the non-template function

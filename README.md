@@ -6,12 +6,11 @@ This project demonstrates an **experimental dual-mode C++ library** that support
 
 ### Technical Challenges Solved:
 - **System header redefinition**: Centralized system headers in `system_headers.hpp` to prevent ODR violations
-- **Module export macros**: Created conditional macros (`DEMO_EXPORT`, `DEMO_MODULE_EXPORT`) that expand correctly in each build mode
+- **Module export macros**: Created conditional macros (`DEMO_EXPORT`, `DEMO_EXPORT_FUNCTION`, `DEMO_EXPORT_TEMPLATE` ) that expand correctly in each build mode
 
 ## Key Features
 - **Single user-facing header (`demo.hpp`)**: Works for both modes
-- **Template headers**: Use preprocessor logic to act as both a header and a module interface unit
-- **Non-template functions**: Declared in module interface units and implemented in a traditional source file
+- **Headers with conditional macros**: Use preprocessor logic to act as both a header or a module interface unit
 - **Switch build modes with a single CMake option**
 
 ## Project Structure

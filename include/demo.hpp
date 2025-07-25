@@ -10,20 +10,21 @@
 // which build mode is being used.
 // =============================================
 
+
+#include "config.hpp"
+
 #if defined(DEMO_USE_MODULES)
 // ============================================
 // Module Mode - Import C++20 Module
 // ============================================
 // In module mode, import the Demo module and include config.hpp
 // for macros that aren't exported by modules (like DEMO_TEST_EQ)
-#include "config.hpp"
 import Demo;
 #else
 // ============================================
 // Traditional Header Mode - Include Headers
 // ============================================
 // In header mode, include all necessary headers directly
-#include "config.hpp"
 #include "non_template.hpp"
 #include "template.hpp"
 #endif
